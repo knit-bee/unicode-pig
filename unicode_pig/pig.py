@@ -18,6 +18,7 @@ class Pig:
             self._print_for_linux(reversed=reversed, terminal_size=terminal_size)
 
     def _print_for_windows(self, reversed=False, terminal_size=50):
+        terminal_size = terminal_size - 6
         queue1, queue2 = self._generate_pig_queue(reversed=reversed)
         if reversed:
             space_range = range(0, terminal_size)
@@ -33,8 +34,8 @@ class Pig:
                 else:
                     print(pad_space + queue2[i])
             wcon.gotoxy(cursor_x, cursor_y)
-            for _ in range(len(queue1)):
-                print(" " * 20)
+        for _ in range(len(queue1)):
+            print(" " * 20)
 
     def _print_for_linux(self, reversed=False, terminal_size=50):
         queue1, queue2 = self._generate_pig_queue(reversed=reversed)
@@ -56,7 +57,7 @@ class Pig:
             sys.stdout.write("\x1b[1A\x1b[2K")
 
     def _generate_pig_queue(self, reversed=False):
-        pig = [" ^^___  ", "@''   )ð", "  '`'`  "]
+        pig = [" ^^___   ", "@''   )ð ", "  '`'`   "]
         queue1 = deque([], 3)
         queue2 = deque([], 3)
         for line in pig[:2]:
@@ -66,7 +67,7 @@ class Pig:
             queue2.append(line)
         if reversed:
             queue1.append(pig[2][::-1])
-            queue2.append("  ´'´'  "[::-1])
+            queue2.append("  ´'´'   "[::-1])
         else:
             queue1.append(pig[2])
             queue2.append("  ´'´'  ")
